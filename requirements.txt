@@ -1,2 +1,2 @@
 groq
-json
+typing-extensions
