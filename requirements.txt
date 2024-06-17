@@ -1,3 +1,2 @@
+stremalit
 groq
-json
-typing
