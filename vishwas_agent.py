@@ -2,6 +2,9 @@ import streamlit as st
 from typing import Generator
 from groq import Groq
 import json
+import requests
+from streamlit_lottie import st_lottie, st_lottie_spinner 
+import time
 
 client = Groq(
     api_key='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',
@@ -11,8 +14,25 @@ with open('insurance_db.json', 'r') as file:
     data = json.load(file)
 data = json.dumps(data)
 
+
 st.set_page_config(page_icon="🚑", layout="wide",
                    page_title="Insurance AI Agent")
+
+if 'loading_anim' not in st.session_state:
+    st.session_state.loading_anim = False
+if st.session_state.loading_anim == False:
+    #Loading animation URL from Lottie
+    url = requests.get(
+    'https://lottie.host/46296744-4b71-4399-93e5-ac0b4b2319c5/OaIS1nRQ6i.json'
+    )
+    url_json = dict()
+    if url.status_code == 200: 
+        url_json = url.json()
+    else: 
+        print('Err')
+    with st_lottie_spinner(url_json, reverse=False, loop=True, quality="high", height=500, key="Loading the agent..."):
+        st.session_state.loading_anim = True
+        time.sleep(3)
 
 def icon(emoji: str):
     """Shows an emoji as a Notion-style page icon."""
