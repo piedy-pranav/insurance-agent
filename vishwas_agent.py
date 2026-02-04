@@ -7,7 +7,7 @@ from streamlit_lottie import st_lottie, st_lottie_spinner
 import time
 
 client = Groq(
-    api_key='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',
+    api_key='',
 )
 
 with open('insurance_db.json', 'r') as file:
